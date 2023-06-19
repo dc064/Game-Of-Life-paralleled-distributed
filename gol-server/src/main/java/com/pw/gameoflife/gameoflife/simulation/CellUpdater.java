@@ -7,14 +7,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.pw.gameoflife.gameoflife.controllers.CellController;
 import com.pw.gameoflife.gameoflife.repositories.CellRepository;
-import com.pw.gameoflife.gameoflife.settings.ChangeableGameSettings;
-import com.pw.gameoflife.gameoflife.settings.ConstantGameSettings;
+import com.pw.gameoflife.gameoflife.settings.GameSettings;
 
 public class CellUpdater {
 
-    static int[][] grid = new int[ConstantGameSettings.boardX][ConstantGameSettings.boardY];
+    static int[][] grid = new int[GameSettings.boardX][GameSettings.boardY];
     static List<Cell> toReturn = new ArrayList<>();
     static final AtomicReference<List<Cell>> toReturnAtom = new AtomicReference<List<Cell>>(toReturn);
     static ThreadPoolExecutor executor;
@@ -29,12 +27,12 @@ public class CellUpdater {
             grid[c.x][c.y] = 1;
         }
 
-        int currentBorder = ChangeableGameSettings.borderType;
-        int currentNeighbourhood = ChangeableGameSettings.neighbourhood;
-        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(ConstantGameSettings.threads);
+        int currentBorder = GameSettings.borderType;
+        int currentNeighbourhood = GameSettings.neighbourhood;
+        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(GameSettings.threads);
 
-        for (int y = 0; y < ConstantGameSettings.boardY; y++) {
-            for (int x = 0; x < ConstantGameSettings.boardX; x++) 
+        for (int y = 0; y < GameSettings.boardY; y++) {
+            for (int x = 0; x < GameSettings.boardX; x++) 
             {
                 Runnable runnable = new SingleCellCalc(x, y, grid[x][y], grid, currentBorder, currentNeighbourhood);
 				executor.execute(runnable);
@@ -89,8 +87,8 @@ public class CellUpdater {
             }
             else {
                 int currY = y + 1;
-                if (currY >= ConstantGameSettings.boardY) {
-                    currY -= ConstantGameSettings.boardY;
+                if (currY >= GameSettings.boardY) {
+                    currY -= GameSettings.boardY;
                 }
                 counter += grid[x][currY];
             }
@@ -102,7 +100,7 @@ public class CellUpdater {
             else {
                 int currX = x - 1;
                 if (currX < 0) {
-                    currX += ConstantGameSettings.boardX;
+                    currX += GameSettings.boardX;
                 }
                 counter += grid[currX][y];
             }
@@ -113,8 +111,8 @@ public class CellUpdater {
             }
             else {
                 int currX = x + 1;
-                if (currX >= ConstantGameSettings.boardX) {
-                    currX -= ConstantGameSettings.boardX;
+                if (currX >= GameSettings.boardX) {
+                    currX -= GameSettings.boardX;
                 }
                 counter += grid[currX][y];
             }
@@ -126,7 +124,7 @@ public class CellUpdater {
             else {
                 int currY = y - 1;
                 if (currY < 0) {
-                    currY += ConstantGameSettings.boardY;
+                    currY += GameSettings.boardY;
                 }
                 counter += grid[x][currY];
             }
@@ -184,10 +182,10 @@ public class CellUpdater {
                 int currX = x - 1;
                 int currY = y - 1;
                 if (currX < 0) {
-                    currX += ConstantGameSettings.boardX;
+                    currX += GameSettings.boardX;
                 }
                 if (currY < 0) {
-                    currY += ConstantGameSettings.boardY;
+                    currY += GameSettings.boardY;
                 }
                 counter += grid[currX][currY];
             }
@@ -198,7 +196,7 @@ public class CellUpdater {
             } else {
                 int currY = y - 1;
                 if (currY < 0) {
-                    currY += ConstantGameSettings.boardY;
+                    currY += GameSettings.boardY;
                 }
                 counter += grid[x][currY];
             }
@@ -209,11 +207,11 @@ public class CellUpdater {
             } else {
                 int currX = x + 1;
                 int currY = y - 1;
-                if (currX >= ConstantGameSettings.boardX) {
-                    currX -= ConstantGameSettings.boardX;
+                if (currX >= GameSettings.boardX) {
+                    currX -= GameSettings.boardX;
                 }
                 if (currY < 0) {
-                    currY += ConstantGameSettings.boardY;
+                    currY += GameSettings.boardY;
                 }
                 counter += grid[currX][currY];
             }
@@ -224,7 +222,7 @@ public class CellUpdater {
             } else {
                 int currX = x - 1;
                 if (currX < 0) {
-                    currX += ConstantGameSettings.boardX;
+                    currX += GameSettings.boardX;
                 }
                 counter += grid[currX][y];
             }
@@ -234,8 +232,8 @@ public class CellUpdater {
                 counter += grid[x + 1][y];
             } else {
                 int currX = x + 1;
-                if (currX >= ConstantGameSettings.boardX) {
-                    currX -= ConstantGameSettings.boardX;
+                if (currX >= GameSettings.boardX) {
+                    currX -= GameSettings.boardX;
                 }
                 counter += grid[currX][y];
             }
@@ -247,10 +245,10 @@ public class CellUpdater {
                 int currX = x - 1;
                 int currY = y + 1;
                 if (currX < 0) {
-                    currX += ConstantGameSettings.boardX;
+                    currX += GameSettings.boardX;
                 }
-                if (currY >= ConstantGameSettings.boardY) {
-                    currY -= ConstantGameSettings.boardY;
+                if (currY >= GameSettings.boardY) {
+                    currY -= GameSettings.boardY;
                 }
                 counter += grid[currX][currY];
             }
@@ -260,8 +258,8 @@ public class CellUpdater {
                 counter += grid[x][y + 1];
             } else {
                 int currY = y + 1;
-                if (currY >= ConstantGameSettings.boardY) {
-                    currY -= ConstantGameSettings.boardY;
+                if (currY >= GameSettings.boardY) {
+                    currY -= GameSettings.boardY;
                 }
                 counter += grid[x][currY];
             }
@@ -273,11 +271,11 @@ public class CellUpdater {
             else {
                 int currX = x + 1;
                 int currY = y + 1;
-                if (currX >= ConstantGameSettings.boardX) {
-                    currX -=ConstantGameSettings.boardX;
+                if (currX >= GameSettings.boardX) {
+                    currX -= GameSettings.boardX;
                 }
-                if (currY >= ConstantGameSettings.boardY) {
-                    currY -= ConstantGameSettings.boardY;
+                if (currY >= GameSettings.boardY) {
+                    currY -= GameSettings.boardY;
                 }
                 counter += grid[currX][currY];
             }
@@ -286,9 +284,9 @@ public class CellUpdater {
     }
 
     public static int checkCellType(int x, int y) {
-        boolean up = y + 1 >= ConstantGameSettings.boardY;
+        boolean up = y + 1 >= GameSettings.boardY;
         boolean down = y - 1 < 0;
-        boolean right = x + 1 >= ConstantGameSettings.boardX;
+        boolean right = x + 1 >= GameSettings.boardX;
         boolean left = x - 1 < 0;
 
         if (up) {

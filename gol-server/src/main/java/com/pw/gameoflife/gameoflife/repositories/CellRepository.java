@@ -11,12 +11,6 @@ import com.pw.gameoflife.gameoflife.simulation.Cell;
 public class CellRepository {
 
     public static List<Cell>[] cells;
-    //public static List<Cell> cells = new ArrayList<>();
-
-    // public static List<Cell> get()
-    // {
-    //     return CellRepository.cells;
-    // }
 
     public static void put(List<Cell> cells, int iteration)
     {
