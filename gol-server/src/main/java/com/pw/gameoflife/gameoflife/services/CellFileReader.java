@@ -1,10 +1,13 @@
-package com.pw.gameoflife.gameoflife;
+package com.pw.gameoflife.gameoflife.services;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.pw.gameoflife.gameoflife.repositories.CellRepository;
+import com.pw.gameoflife.gameoflife.simulation.Cell;
 
 public class CellFileReader {
     public static void readFromFile(String filename) throws IOException
@@ -34,6 +37,6 @@ public class CellFileReader {
             System.out.println("There is a problem with data file");
         }
 
-        CellRepository.put(newCells);
+        CellRepository.put(newCells, 0);
     }
 }

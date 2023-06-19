@@ -7,11 +7,13 @@ public class GlobalSettings {
     public static int board_w = 700;
     public static int board_h = 700;
 
-    public static int M = 20;
-    public static int D = 20;
+    public static int M = 40;
+    public static int D = 40;
 
     public static int w_cell = board_w / M;
     public static int h_cell = board_h / D;
 
-    public static int delay;
+    public static int delay = 50;
+
+    public static int iterations = 2000;
 }

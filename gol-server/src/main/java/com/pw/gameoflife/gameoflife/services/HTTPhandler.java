@@ -1,4 +1,4 @@
-package com.pw.gameoflife.gameoflife;
+package com.pw.gameoflife.gameoflife.services;
 
 import java.net.URI;
 import java.net.URISyntaxException;

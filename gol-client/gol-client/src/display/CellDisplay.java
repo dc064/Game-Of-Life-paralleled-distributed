@@ -1,9 +1,11 @@
+package display;
+
 import java.awt.Canvas;
 import java.awt.Color;
 
 import settings.GlobalSettings;
 
-class CellDisplay extends Canvas    
+public class CellDisplay extends Canvas    
 {    
     public CellDisplay(int x, int y) { 
         setBackground (Color.GREEN);  
